@@ -51,9 +51,8 @@ tasks.register<GradleBuild>("runChecks") {
         "jacocoTestCoverageVerification",
         "buildHealth",
         "diktatFix",
-        "build"
+        "build",
+        "publishToMavenLocal"
     )
-    outputs
-        .dir(layout.buildDirectory.dir("runChecks"))
-        .withPropertyName("outputDir")
 }
+
