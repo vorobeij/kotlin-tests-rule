@@ -8,9 +8,13 @@ interface FilesProvider {
      * src/test|/**/*.kt
      *
      * @param moduleRoot
+     * @param testFilesRelativePath
      * @return List of paths to test files in module
      */
-    fun getTestFiles(moduleRoot: String): SourceFiles
+    fun getTestFiles(
+        moduleRoot: String,
+        testFilesRelativePath: String = "src/test"
+    ): SourceFiles
 
     /**
      * src/[!test]/**/*.kt

@@ -14,8 +14,11 @@ class FilesProviderImpl : FilesProvider {
         return modules
     }
 
-    override fun getTestFiles(moduleRoot: String): SourceFiles {
-        val root = "$moduleRoot/src/test/kotlin"
+    override fun getTestFiles(
+        moduleRoot: String,
+        testFilesRelativePath: String
+    ): SourceFiles {
+        val root = "$moduleRoot/$testFilesRelativePath/kotlin"
         val files: MutableList<String> = mutableListOf()
         File(root)
             .walkTopDown()

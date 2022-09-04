@@ -26,7 +26,7 @@ apply(from = "$rootDir/jacoco.gradle")
 // todo to separate script
 tasks.withType<Jar> {
     manifest {
-        attributes["Main-Class"] = "ru.vorobeij.Main"
+        attributes["Main-Class"] = "ru.vorobeij.Application"
     }
     from(sourceSets.main.get().output)
     dependsOn(configurations.runtimeClasspath)
