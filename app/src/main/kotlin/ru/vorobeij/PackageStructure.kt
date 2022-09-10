@@ -45,17 +45,15 @@ class PackageStructure(
                 val name = File(testFiles.root, testFilePath).name.replace("Test.kt", ".kt")
                 val sourceFile = sourceFiles.files.find { File(sourceFiles.root, it).name == name }
 
-                sourceFile?.let {
-                    val targetFile = File(testFiles.root, sourceFile)
-                    targetFile.parentFile.mkdirs()
-                    result.append("${File(testFiles.root, testFilePath).path} -> ${targetFile.path}\n")
-                    Files.move(File(testFiles.root, testFilePath).toPath(), targetFile.toPath(), StandardCopyOption.REPLACE_EXISTING)
+                val targetFile = sourceFile?.let {
+                    val newName = File(it).name.replace("(Test)?.kt".toRegex(), "Test.kt")
+                    File(testFiles.root, File(File(it).parentFile, newName).path)
                 } ?: run {
-                    val targetFile = File(undefinedFolder, testFilePath)
-                    targetFile.parentFile.mkdirs()
-                    result.append("${File(testFiles.root, testFilePath).toPath()} -> ${targetFile.toPath()}\n")
-                    Files.move(File(testFiles.root, testFilePath).toPath(), targetFile.toPath(), StandardCopyOption.REPLACE_EXISTING)
+                    File(undefinedFolder, testFilePath)
                 }
+                targetFile.parentFile.mkdirs()
+                result.append("${File(testFiles.root, testFilePath).toPath()} -> ${targetFile.toPath()}\n")
+                Files.move(File(testFiles.root, testFilePath).toPath(), targetFile.toPath(), StandardCopyOption.REPLACE_EXISTING)
             }
         }
 
