@@ -27,3 +27,30 @@ manually.
    ```shell
    Test source sets are not mirrored with code source sets. Run kotlin-tests-rule.jar locally
    ```
+
+### OR
+
+<img src="wiki/images/change-files-tree.png" width="300">
+
+**kotlin-tests-rule.gradle**
+
+```groovy
+task kotlinTestRule(type: Exec) {
+   workingDir(projectDir)
+   commandLine 'sh', './ci/testrules/kotlin-tests-rule.sh'
+}
+```
+
+**kotlin-tests-rule.sh**
+
+```shell
+#!/usr/bin/env bash
+
+java - jar./ci/testrules/kotlin.tests.rule.jar --projectRoot ./
+```
+
+**build.gradle.kts**
+
+```kotlin
+apply(from = "./ci/testrules/kotlin-tests-rule.gradle")
+```
