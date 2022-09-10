@@ -54,3 +54,7 @@ java - jar./ci/testrules/kotlin.tests.rule.jar --projectRoot ./
 ```kotlin
 apply(from = "./ci/testrules/kotlin-tests-rule.gradle")
 ```
+
+# TODO
+
+Make a gradle plugin from this project 
